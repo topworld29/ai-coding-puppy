@@ -40,10 +40,10 @@
 
 ## 安装
 
-1. 从 [Releases](../../releases) 下载最新版 `小金毛桌宠_<版本>_Windows_x64.exe`。
+1. 从 [Releases](../../releases) 下载最新版 `golden-puppy-pet_<版本>_Windows_x64.exe`（即「小金毛桌宠」的 Windows x64 安装包）。
 2. （推荐）用 PowerShell 校验 SHA-256，与 Release 页面公布值比对：
    ```powershell
-   Get-FileHash .\小金毛桌宠_0.3.13_Windows_x64.exe -Algorithm SHA256
+   Get-FileHash .\golden-puppy-pet_0.3.13_Windows_x64.exe -Algorithm SHA256
    ```
 3. 运行安装包。升级时直接覆盖安装即可，无需先卸载。
 4. 安装后启动一次「小金毛桌宠」，它会按当前 Windows 用户与实际安装位置自动安装各工具的监测桥接（见下一节）。如果相关工具当时已经打开，请重启对应程序让桥接生效。
