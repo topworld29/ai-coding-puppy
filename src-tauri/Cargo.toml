@@ -1,6 +1,6 @@
 [package]
 name = "golden-puppy-pet"
-version = "0.3.14"
+version = "0.3.15"
 description = "小狗桌宠 - Claude Code / OpenCode / Codex / ZCode 状态宠物"
 edition = "2021"
 

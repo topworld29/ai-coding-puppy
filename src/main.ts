@@ -230,6 +230,7 @@ async function togglePanel() {
 }
 
 canvas.addEventListener("pointerdown", (e) => {
+  if (e.button !== 0) return;
   downX = e.clientX;
   downY = e.clientY;
   downActive = true;
@@ -262,6 +263,9 @@ canvas.addEventListener("keydown", (event) => {
   event.preventDefault();
   void togglePanel();
 });
+
+// 屏蔽 WebView 默认右键菜单：窗口内任何位置（含透明区域与小狗 canvas）都不弹出
+document.addEventListener("contextmenu", (event) => event.preventDefault());
 
 window.addEventListener("pointercancel", () => {
   downActive = false;
