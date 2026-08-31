@@ -310,6 +310,11 @@ canvas.addEventListener("keydown", (event) => {
 // 屏蔽 WebView 默认右键菜单：窗口内任何位置（含透明区域与小狗 canvas）都不弹出
 document.addEventListener("contextmenu", (event) => event.preventDefault());
 
+// 焦点轮廓只在键盘操作时显示：canvas 非原生控件，鼠标点击聚焦也会命中 :focus-visible，
+// 需要用类名门控，避免点击/右键时出现描边框
+window.addEventListener("keydown", () => canvas.classList.add("keyboard-nav"));
+window.addEventListener("pointerdown", () => canvas.classList.remove("keyboard-nav"));
+
 window.addEventListener("pointercancel", () => {
   downActive = false;
 });
