@@ -1480,7 +1480,7 @@ dependencies = [
 
 [[package]]
 name = "golden-puppy-pet"
-version = "0.3.15"
+version = "0.3.16"
 dependencies = [
  "axum",
  "rusqlite",
