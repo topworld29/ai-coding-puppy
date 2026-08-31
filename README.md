@@ -136,7 +136,7 @@ src-tauri/
 
 ## 免责声明
 
-这是一个非官方的第三方个人项目，与 OpenAI、Anthropic、OpenCode、ZCode 及其关联公司不存在隶属、授权或背书关系。文中出现的产品名称仅用于说明兼容性，其商标归各自权利人所有。本项目未使用上述任何一方的官方 Logo 或素材；小狗形象为本项目原创的像素绘制，其外形特征参考了幼年金毛寻回猎犬（Golden Retriever 幼犬），不基于任何现有 IP 角色。
+这是一个非官方的第三方个人项目，与 OpenAI、Anthropic、OpenCode、ZCode 及其关联公司不存在隶属、授权或背书关系。文中出现的产品名称仅用于说明兼容性，其商标归各自权利人所有。本项目未使用上述任何一方的官方 Logo 或素材；小狗形象为本项目原创的像素绘制。
 
 ## License
 
@@ -147,8 +147,6 @@ src-tauri/
 ## English Summary
 
 **Puppy Desktop Pet** (小狗桌宠) is a Windows-only (10/11 x64) desktop pet — an original 16×16 pixel puppy — that monitors the session status of **Claude Code, Codex, OpenCode and ZCode** (both CLI and desktop apps) and shows at a glance whether tasks are *running*, *waiting for your input*, *completed*, or *failed*.
-
-- The puppy is original pixel art drawn for this project; its look is inspired by a young Golden Retriever and is not based on any existing IP character.
 
 - Everything runs **locally**: a loopback-only event endpoint on `127.0.0.1:7878`, no telemetry, no cloud uploads.
 - On first launch it transparently installs hooks/plugins for the four tools listed above (backup files are created; see the configuration table for details and manual removal steps).
