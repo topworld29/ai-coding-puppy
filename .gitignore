@@ -1,0 +1,56 @@
+# Node / Vite
+node_modules/
+dist/
+.vite/
+npm-debug.log*
+
+# Rust / Tauri
+target/
+src-tauri/target/
+src-tauri/gen/
+# 本机专用 cargo 配置（含本机路径），不提交
+src-tauri/.cargo/
+
+# Release artifacts（安装包通过 GitHub Release 分发，不进 Git）
+release/
+*.exe
+*.msi
+*.msix
+*.dmg
+*.app
+
+# 本地 QA 证据与设计过程稿
+bug-hunt/
+design/
+
+# 内部交接与历史发布说明（内容已并入 CHANGELOG / Release Notes）
+GitHub发布交接文档-*.md
+发布说明-*.md
+
+# AI 工具本地残留
+.harness-memory/
+.opencode/
+.video_agent/
+.claude/
+.codex/
+.zcode/
+
+# 用户数据 / 本地数据库 / 日志
+*.sqlite
+*.sqlite3
+*.db
+*.jsonl
+*.golden-puppy.bak
+muted-sessions.json
+
+# 编辑器与操作系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 环境变量与密钥
+.env
+.env.*
+!.env.example

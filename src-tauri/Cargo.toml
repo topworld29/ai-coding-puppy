@@ -1,0 +1,26 @@
+[package]
+name = "golden-puppy-pet"
+version = "0.3.13"
+description = "小金毛桌宠 - Claude Code / OpenCode / Codex / ZCode 状态宠物"
+edition = "2021"
+
+[lib]
+name = "golden_puppy_pet_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-notification = "2"
+tauri-plugin-autostart = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "net"] }
+axum = "0.8"
+rusqlite = { version = "0.32", features = ["bundled"] }
+
+[profile.release]
+strip = true
+lto = true

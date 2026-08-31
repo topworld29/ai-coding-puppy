@@ -1,0 +1,9 @@
+{
+  "identifier": "default",
+  "description": "pet window default capabilities",
+  "windows": ["pet"],
+  "permissions": [
+    "core:default",
+    "core:window:allow-start-dragging"
+  ]
+}
