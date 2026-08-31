@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "小金毛桌宠",
+  "productName": "小狗桌宠",
   "version": "0.3.13",
   "identifier": "com.maomao.golden-puppy",
   "build": {
@@ -13,7 +13,7 @@
     "windows": [
       {
         "label": "pet",
-        "title": "小金毛",
+        "title": "小狗",
         "width": 280,
         "height": 240,
         "transparent": true,

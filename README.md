@@ -1,8 +1,8 @@
-# 小金毛桌宠（Golden Puppy Pet）
+# 小狗桌宠（Puppy Desktop Pet）
 
-一只趴在 Windows 桌面角落的原创像素小金毛，实时帮你盯住多个 AI 编程工具的任务状态：**运行中、等待输入、已完成、出错**，不用来回切窗口，一眼便知。
+一只趴在 Windows 桌面角落的原创像素小狗，实时帮你盯住多个 AI 编程工具的任务状态：**运行中、等待输入、已完成、出错**，不用来回切窗口，一眼便知。
 
-> A tiny original pixel-art golden retriever that lives on your Windows desktop and tracks the task status of Claude Code, OpenCode, Codex and ZCode sessions — running, waiting for input, completed, or failed — so you don't have to keep switching windows. All data is processed locally; nothing is uploaded. See the English summary at the end of this README.
+> A tiny original pixel-art puppy that lives on your Windows desktop and tracks the task status of Claude Code, OpenCode, Codex and ZCode sessions — running, waiting for input, completed, or failed — so you don't have to keep switching windows. All data is processed locally; nothing is uploaded. See the English summary at the end of this README.
 
 ## 支持的工具与平台
 
@@ -18,13 +18,13 @@
 
 ## 功能
 
-- 16×16 原创像素小金毛（48×48 显示），带状态动画：工作、等待、完成、休眠。
+- 16×16 原创像素小狗（48×48 显示），带状态动画：工作、等待、完成、休眠。
 - 多会话面板：显示程序名、会话名、状态与持续时间；面板内部滚动，宽度固定不抖动。
 - **等待输入**红字提醒：权限请求、问答、交互请求会立刻标红。
 - **已完成**提醒保留，直到你确认或清除。
 - 行尾箭头：一键跳到对应程序窗口（保持目标窗口原有的最大化状态）。
 - 行首叉号：静音误报会话，直到该会话出现新活动前不再打扰。
-- 小金毛本体支持键盘操作：`Tab` 聚焦，`Enter` / `Space` 开关面板。
+- 小狗本体支持键盘操作：`Tab` 聚焦，`Enter` / `Space` 开关面板。
 - 系统托盘：显示/隐藏、开机自启、退出。
 - 点击已完成状态可快速确认提醒。
 
@@ -40,13 +40,13 @@
 
 ## 安装
 
-1. 从 [Releases](../../releases) 下载最新版 `golden-puppy-pet_<版本>_Windows_x64.exe`（即「小金毛桌宠」的 Windows x64 安装包）。
+1. 从 [Releases](../../releases) 下载最新版 `golden-puppy-pet_<版本>_Windows_x64.exe`（即「小狗桌宠」的 Windows x64 安装包）。
 2. （推荐）用 PowerShell 校验 SHA-256，与 Release 页面公布值比对：
    ```powershell
    Get-FileHash .\golden-puppy-pet_0.3.13_Windows_x64.exe -Algorithm SHA256
    ```
 3. 运行安装包。升级时直接覆盖安装即可，无需先卸载。
-4. 安装后启动一次「小金毛桌宠」，它会按当前 Windows 用户与实际安装位置自动安装各工具的监测桥接（见下一节）。如果相关工具当时已经打开，请重启对应程序让桥接生效。
+4. 安装后启动一次「小狗桌宠」，它会按当前 Windows 用户与实际安装位置自动安装各工具的监测桥接（见下一节）。如果相关工具当时已经打开，请重启对应程序让桥接生效。
 
 ### SmartScreen 提示
 
@@ -72,7 +72,7 @@
 
 ## 使用方法
 
-- 桌宠默认置顶显示在桌面；点击小金毛（或 `Enter`/`Space`）开关会话面板。
+- 桌宠默认置顶显示在桌面；点击小狗（或 `Enter`/`Space`）开关会话面板。
 - 面板中每行：叉号 = 静音该会话；箭头 = 跳到对应程序窗口；完成行右侧勾 = 清除提醒。
 - 托盘图标右键：显示/隐藏、开机自启、退出。
 
@@ -122,7 +122,7 @@ cargo fmt --manifest-path src-tauri/Cargo.toml -- --check
 ## 目录结构
 
 ```text
-src/                     前端：TypeScript + Canvas 像素小金毛与面板渲染
+src/                     前端：TypeScript + Canvas 像素小狗与面板渲染
   main.ts                  面板状态与交互
   sprite.ts                16×16 像素矩阵与状态动画
   styles.css               透明窗口与面板样式
@@ -136,7 +136,7 @@ src-tauri/
 
 ## 免责声明
 
-这是一个非官方的第三方个人项目，与 OpenAI、Anthropic、OpenCode、ZCode 及其关联公司不存在隶属、授权或背书关系。文中出现的产品名称仅用于说明兼容性，其商标归各自权利人所有。本项目未使用上述任何一方的官方 Logo 或素材；小金毛形象为本项目原创的像素绘制。
+这是一个非官方的第三方个人项目，与 OpenAI、Anthropic、OpenCode、ZCode 及其关联公司不存在隶属、授权或背书关系。文中出现的产品名称仅用于说明兼容性，其商标归各自权利人所有。本项目未使用上述任何一方的官方 Logo 或素材；小狗形象为本项目原创的像素绘制，其外形特征参考了幼年金毛寻回猎犬（Golden Retriever 幼犬），不基于任何现有 IP 角色。
 
 ## License
 
@@ -146,7 +146,9 @@ src-tauri/
 
 ## English Summary
 
-**Golden Puppy Pet** is a Windows-only (10/11 x64) desktop pet — an original 16×16 pixel golden retriever — that monitors the session status of **Claude Code, Codex, OpenCode and ZCode** (both CLI and desktop apps) and shows at a glance whether tasks are *running*, *waiting for your input*, *completed*, or *failed*.
+**Puppy Desktop Pet** (小狗桌宠) is a Windows-only (10/11 x64) desktop pet — an original 16×16 pixel puppy — that monitors the session status of **Claude Code, Codex, OpenCode and ZCode** (both CLI and desktop apps) and shows at a glance whether tasks are *running*, *waiting for your input*, *completed*, or *failed*.
+
+- The puppy is original pixel art drawn for this project; its look is inspired by a young Golden Retriever and is not based on any existing IP character.
 
 - Everything runs **locally**: a loopback-only event endpoint on `127.0.0.1:7878`, no telemetry, no cloud uploads.
 - On first launch it transparently installs hooks/plugins for the four tools listed above (backup files are created; see the configuration table for details and manual removal steps).

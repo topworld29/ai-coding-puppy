@@ -425,9 +425,9 @@ fn show_attention_notification(app: &AppHandle, source: &str, kind: &str, detail
     };
     let builder = app.notification().builder();
     let _ = match kind {
-        "waiting" => builder.title("小金毛在等你 🐾").body(body).show(),
-        "error" => builder.title("小金毛：需要检查 😵").body(body).show(),
-        _ => builder.title("小金毛：干完啦！🎉").body(body).show(),
+        "waiting" => builder.title("小狗在等你 🐾").body(body).show(),
+        "error" => builder.title("小狗：需要检查 😵").body(body).show(),
+        _ => builder.title("小狗：干完啦！🎉").body(body).show(),
     };
 }
 
@@ -1832,7 +1832,7 @@ fn build_tray(app: &tauri::App) -> tauri::Result<()> {
 
     TrayIconBuilder::with_id("pet-tray")
         .icon(app.default_window_icon().unwrap().clone())
-        .tooltip("小金毛桌宠")
+        .tooltip("小狗桌宠")
         .menu(&menu)
         .on_menu_event(|app, event| match event.id().as_ref() {
             "show" => {

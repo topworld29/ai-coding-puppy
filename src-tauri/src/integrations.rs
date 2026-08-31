@@ -355,7 +355,7 @@ mod tests {
         )
         .unwrap();
         let executable =
-            PathBuf::from(r"C:\Users\Another Person\AppData\Local\小金毛桌宠\golden-puppy-pet.exe");
+            PathBuf::from(r"C:\Users\Another Person\AppData\Local\小狗桌宠\golden-puppy-pet.exe");
 
         let first = install_at(&home, &codex_root, &executable).unwrap();
         assert_eq!(

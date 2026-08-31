@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        小金毛桌宠依赖各工具的本地 Hook/数据格式，上游更新可能导致监测失效。
+        小狗桌宠依赖各工具的本地 Hook/数据格式，上游更新可能导致监测失效。
         反馈时请注明工具与版本，帮助我们跟进适配。
 
   - type: input
