@@ -1,6 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { getCurrentWindow } from "@tauri-apps/api/window";
+import { getCurrentWebview } from "@tauri-apps/api/webview";
 import { LogicalPosition, LogicalSize } from "@tauri-apps/api/dpi";
 import { PixelGrid, PALETTE, SIZE, drawPet, PetVisualState } from "./sprite";
 
@@ -63,6 +64,17 @@ let lastShapeW = 0;
 let lastShapeH = 0;
 let minSizeApplied = false;
 
+// 部分 WebView2 运行时版本在窗口 resize 后会丢弃创建时设置的透明
+// DefaultBackgroundColor，桌宠退化为白色不透明背景（用户看到的"白框"）。
+// wry 只在创建时设置一次，因此在每次窗口形状同步与周期兜底中重新应用。
+async function reapplyTransparentBackground() {
+  try {
+    await getCurrentWebview().setBackgroundColor([0, 0, 0, 0]);
+  } catch (error) {
+    console.error("failed to reapply transparent background", error);
+  }
+}
+
 async function syncWindowShape() {
   const win = getCurrentWindow();
   if (!minSizeApplied) {
@@ -89,6 +101,7 @@ async function syncWindowShape() {
   const bottomY = pos.y + size.height;
   await win.setSize(new LogicalSize(wR, hR));
   await win.setPosition(new LogicalPosition(rightX / scale - wR, bottomY / scale - hR));
+  await reapplyTransparentBackground();
 }
 
 function paintGrid() {
@@ -327,5 +340,6 @@ document.addEventListener("DOMContentLoaded", () => {
 listen<PetStatePayload>("pet-state", (e) => onState(e.payload));
 
 setInterval(renderPanel, 1000);
+setInterval(reapplyTransparentBackground, 10_000);
 
 requestAnimationFrame(loop);
