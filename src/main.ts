@@ -1,8 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { getCurrentWebview } from "@tauri-apps/api/webview";
-import { LogicalPosition, LogicalSize } from "@tauri-apps/api/dpi";
 import { PixelGrid, PALETTE, SIZE, drawPet, PetVisualState } from "./sprite";
 
 interface SessionInfo {
@@ -50,58 +48,6 @@ canvas.setAttribute("aria-controls", "panel");
 function setPanelHidden(hidden: boolean) {
   panel.classList.toggle("hidden", hidden);
   canvas.setAttribute("aria-expanded", String(!hidden));
-  if (hidden) void syncWindowShape();
-}
-
-// 窗口只包住可见内容：面板收起时缩到小狗本身，展开时容纳面板+小狗。
-// 缩放以窗口右下角为锚点，保证小狗在屏幕上的位置不变，窗外区域的点击直接穿透到下层窗口。
-const PET_DISPLAY = 48;
-const SHAPE_RIM = 4;
-const PANEL_RIGHT = 4;
-const PANEL_GAP = 16;
-const CLOSED_SIZE = PET_DISPLAY + SHAPE_RIM * 2;
-let lastShapeW = 0;
-let lastShapeH = 0;
-let minSizeApplied = false;
-
-// 部分 WebView2 运行时版本在窗口 resize 后会丢弃创建时设置的透明
-// DefaultBackgroundColor，桌宠退化为白色不透明背景（用户看到的"白框"）。
-// wry 只在创建时设置一次，因此在每次窗口形状同步与周期兜底中重新应用。
-async function reapplyTransparentBackground() {
-  try {
-    await getCurrentWebview().setBackgroundColor([0, 0, 0, 0]);
-  } catch (error) {
-    console.error("failed to reapply transparent background", error);
-  }
-}
-
-async function syncWindowShape() {
-  const win = getCurrentWindow();
-  if (!minSizeApplied) {
-    // 覆盖 Windows 上默认的最小窗口尺寸（136×39 CSS），允许收缩到小狗本身大小
-    await win.setMinSize(new LogicalSize(1, 1));
-    minSizeApplied = true;
-  }
-  const hidden = panel.classList.contains("hidden");
-  let w = CLOSED_SIZE;
-  let h = CLOSED_SIZE;
-  if (!hidden) {
-    w = 264 + PANEL_RIGHT;
-    h = SHAPE_RIM + PET_DISPLAY + PANEL_GAP + Math.ceil(panel.offsetHeight) + SHAPE_RIM;
-  }
-  const wR = Math.round(w);
-  const hR = Math.round(h);
-  if (wR === lastShapeW && hR === lastShapeH) return;
-  lastShapeW = wR;
-  lastShapeH = hR;
-  const scale = await win.scaleFactor();
-  const pos = await win.outerPosition();
-  const size = await win.outerSize();
-  const rightX = pos.x + size.width;
-  const bottomY = pos.y + size.height;
-  await win.setSize(new LogicalSize(wR, hR));
-  await win.setPosition(new LogicalPosition(rightX / scale - wR, bottomY / scale - hR));
-  await reapplyTransparentBackground();
 }
 
 function paintGrid() {
@@ -146,7 +92,6 @@ function renderPanel() {
     panel.innerHTML =
       '<div class="panel-title">0个会话</div><div class="empty">Claude Code / OpenCode / Codex / ZCode<br />跑起来我就会醒啦</div>';
     panel.scrollTop = 0;
-    void syncWindowShape();
     return;
   }
   const bySource = new Map<string, SessionInfo[]>();
@@ -195,7 +140,6 @@ function renderPanel() {
   const hint = actionMessage ? `<span class="panel-message">${escapeHtml(actionMessage)}</span>` : "";
   panel.innerHTML = `<div class="panel-title"><span>${visible.length}个会话</span>${hint}</div>${rows.join("")}`;
   panel.scrollTop = previousScrollTop;
-  void syncWindowShape();
 }
 
 function escapeHtml(s: string) {
@@ -334,12 +278,10 @@ window.addEventListener("pointercancel", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   invoke<PetStatePayload>("get_state").then(onState);
-  void syncWindowShape();
 });
 
 listen<PetStatePayload>("pet-state", (e) => onState(e.payload));
 
 setInterval(renderPanel, 1000);
-setInterval(reapplyTransparentBackground, 10_000);
 
 requestAnimationFrame(loop);
