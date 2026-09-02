@@ -20,8 +20,8 @@ body {
 
 #pet {
   position: absolute;
-  right: 8px;
-  bottom: 16px;
+  right: 4px;
+  bottom: 4px;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   cursor: pointer;
@@ -35,8 +35,8 @@ body {
 
 #panel {
   position: absolute;
+  top: 4px;
   right: 4px;
-  bottom: 80px;
   width: 264px;
   min-width: 264px;
   max-width: 264px;

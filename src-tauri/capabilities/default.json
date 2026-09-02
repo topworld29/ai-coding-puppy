@@ -1,9 +1,16 @@
 {
   "identifier": "default",
   "description": "pet window default capabilities",
-  "windows": ["pet"],
+  "windows": ["pet", "panel"],
   "permissions": [
     "core:default",
-    "core:window:allow-start-dragging"
+    "core:window:allow-start-dragging",
+    "core:window:allow-get-all-windows",
+    "core:window:allow-show",
+    "core:window:allow-hide",
+    "core:window:allow-is-visible",
+    "core:window:allow-set-position",
+    "core:window:allow-set-min-size",
+    "core:window:allow-set-size"
   ]
 }
