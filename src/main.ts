@@ -32,7 +32,9 @@ const isPetWindow = currentWindow.label === "pet";
 const PANEL_LABEL = "panel";
 const PANEL_W = 268;
 const PANEL_H = 148;
-const PANEL_GAP = 12;
+// 窗口间隙 8 CSS + panel 窗口内 bottom:4 + pet 窗口内 canvas 顶留白 4 = 可见间隙约 16 CSS，
+// 实测（1.75 DPI）与 0.3.19 单窗口版的面板-小狗距离一致
+const PANEL_GAP = 8;
 
 let aggregate = "sleeping";
 let sessions: SessionInfo[] = [];
@@ -193,11 +195,6 @@ if (isPetWindow) {
   window.addEventListener("pointercancel", () => {
     downActive = false;
   });
-
-  // 焦点轮廓只在键盘操作时显示：canvas 非原生控件，鼠标点击聚焦也会命中 :focus-visible，
-  // 需要用类名门控，避免点击/右键时出现描边框
-  window.addEventListener("keydown", () => canvas.classList.add("keyboard-nav"));
-  window.addEventListener("pointerdown", () => canvas.classList.remove("keyboard-nav"));
 
   // 面板窗口自行收起（清除最后一个会话/跳转成功）时同步 aria 状态
   listen<boolean>("panel-visibility", (e) =>

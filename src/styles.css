@@ -25,17 +25,12 @@ body {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   cursor: pointer;
-}
-
-#pet.keyboard-nav:focus-visible {
-  outline: 2px solid #e2bd80;
-  outline-offset: 2px;
-  border-radius: 4px;
+  outline: none;
 }
 
 #panel {
   position: absolute;
-  top: 4px;
+  bottom: 4px;
   right: 4px;
   width: 264px;
   min-width: 264px;
