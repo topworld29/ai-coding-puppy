@@ -151,6 +151,11 @@ if (isPetWindow) {
     requestAnimationFrame(loop);
   }
 
+  // 点击/拖动判定共用 slop：CSS 像素。3px 在高 DPI 缩放屏（如 1.75x）上只有约 5 个物理
+  // 像素，真人点击按下到抬起的自然漂移就会超过，导致点击被误判为拖动（面板弹不出）。
+  // 6px 内算点击，超过才进入拖动（正常拖动意图的位移远大于此，无感）。
+  const CLICK_SLOP = 6;
+
   let downX = 0;
   let downY = 0;
   let downActive = false;
@@ -166,7 +171,10 @@ if (isPetWindow) {
 
   window.addEventListener("pointermove", (e) => {
     if (!downActive || moved) return;
-    if (Math.abs(e.clientX - downX) > 3 || Math.abs(e.clientY - downY) > 3) {
+    if (
+      Math.abs(e.clientX - downX) > CLICK_SLOP ||
+      Math.abs(e.clientY - downY) > CLICK_SLOP
+    ) {
       moved = true;
       void setPanelVisible(false);
       getCurrentWindow().startDragging();
@@ -179,8 +187,8 @@ if (isPetWindow) {
     if (
       !moved &&
       e.target === canvas &&
-      Math.abs(e.clientX - downX) < 4 &&
-      Math.abs(e.clientY - downY) < 4
+      Math.abs(e.clientX - downX) <= CLICK_SLOP &&
+      Math.abs(e.clientY - downY) <= CLICK_SLOP
     ) {
       await togglePanel();
     }
