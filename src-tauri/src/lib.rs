@@ -1814,6 +1814,15 @@ fn position_window(app: &tauri::App) {
 }
 
 fn build_tray(app: &tauri::App) -> tauri::Result<()> {
+    // 版本行：enabled=false 显示为灰色且不可点击，仅供查看；
+    // 版本号编译期取自 Cargo.toml（五处版本同步的其中一处）
+    let version = MenuItem::with_id(
+        app,
+        "version",
+        format!("小狗桌宠 v{}", env!("CARGO_PKG_VERSION")),
+        false,
+        None::<&str>,
+    )?;
     let show = MenuItem::with_id(app, "show", "显示 / 隐藏", true, None::<&str>)?;
     let autostart_enabled = {
         use tauri_plugin_autostart::ManagerExt;
@@ -1828,7 +1837,7 @@ fn build_tray(app: &tauri::App) -> tauri::Result<()> {
         None::<&str>,
     )?;
     let quit = MenuItem::with_id(app, "quit", "退出", true, None::<&str>)?;
-    let menu = Menu::with_items(app, &[&show, &autostart, &quit])?;
+    let menu = Menu::with_items(app, &[&version, &show, &autostart, &quit])?;
 
     TrayIconBuilder::with_id("pet-tray")
         .icon(app.default_window_icon().unwrap().clone())
