@@ -34,6 +34,7 @@ GitHub发布交接文档-*.md
 .claude/
 .codex/
 .zcode/
+.mimosa/
 
 # 用户数据 / 本地数据库 / 日志
 *.sqlite
