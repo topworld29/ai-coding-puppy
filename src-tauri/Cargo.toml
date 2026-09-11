@@ -1,6 +1,6 @@
 [package]
 name = "golden-puppy-pet"
-version = "0.4.1"
+version = "0.4.2"
 description = "小狗桌宠 - Claude Code / OpenCode / Codex / ZCode 状态宠物"
 edition = "2021"
 
@@ -13,6 +13,7 @@ tauri-build = { version = "2", features = [] }
 
 [dependencies]
 tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-single-instance = "2"
 tauri-plugin-notification = "2"
 tauri-plugin-autostart = "2"
 serde = { version = "1", features = ["derive"] }

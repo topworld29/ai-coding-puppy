@@ -2007,6 +2007,15 @@ pub fn run() {
     let store = Arc::new(Mutex::new(Store::default()));
 
     tauri::Builder::default()
+        // 必须是第一个注册的插件（官方要求）。第二个实例启动时自动退出，
+        // 并把这里当作「用户想让小狗现身」的信号：若被托盘隐藏则恢复显示。
+        .plugin(tauri_plugin_single_instance::init(|app, _argv, _cwd| {
+            if let Some(window) = app.get_webview_window("pet") {
+                if !window.is_visible().unwrap_or(false) {
+                    let _ = window.show();
+                }
+            }
+        }))
         .plugin(tauri_plugin_notification::init())
         .plugin(tauri_plugin_autostart::init(
             tauri_plugin_autostart::MacosLauncher::LaunchAgent,
