@@ -217,12 +217,30 @@ if (isPetWindow) {
   let actionMessage = "";
   let actionMessageTimer: number | undefined;
 
+  // 面板每秒整秒重建 innerHTML；点击按钮的按下与抬起若跨过重建瞬间，
+  // 按钮元素被替换、click 不再派发（约 1/10 概率点击无效）。
+  // 按下落在操作按钮上时暂停重建，抬起后再延迟释放，保证 click 派发完成。
+  let pointerHold = false;
+  panel.addEventListener("pointerdown", (e) => {
+    if ((e.target as HTMLElement).closest("button.session-action")) {
+      pointerHold = true;
+    }
+  });
+  const releasePointerHold = () => {
+    window.setTimeout(() => {
+      pointerHold = false;
+    }, 150);
+  };
+  window.addEventListener("pointerup", releasePointerHold);
+  window.addEventListener("pointercancel", releasePointerHold);
+
   onStateRender = renderPanelHook;
   function renderPanelHook() {
     renderPanel();
   }
 
-  function renderPanel() {
+  function renderPanel(force = false) {
+    if (pointerHold && !force) return;
     const previousScrollTop = panel.scrollTop;
     const visible = sessions.filter((s) => s.state !== "idle");
     if (visible.length === 0) {
@@ -282,7 +300,7 @@ if (isPetWindow) {
   function showActionMessage(message: string) {
     actionMessage = message;
     if (actionMessageTimer !== undefined) window.clearTimeout(actionMessageTimer);
-    renderPanel();
+    renderPanel(true);
     actionMessageTimer = window.setTimeout(() => {
       actionMessage = "";
       renderPanel();
